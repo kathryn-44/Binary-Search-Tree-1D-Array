@@ -67,7 +67,7 @@ public class Main {
             size = size * 2 + 1;
         }
 
-        System.out.print("1D array: ");
+        System.out.print("Tree: ");
 
         for (int i = 0; i < size; i++) {
 
