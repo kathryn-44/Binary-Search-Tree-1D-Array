@@ -1,82 +1,176 @@
-# Binary Search Tree (BST) – 1D Array Implementation in Java
+# Binary Search Tree (BST) – Java (Array-Based)
 
-## Overview
-This project implements a **Binary Search Tree (BST)** in **Java** using a **1-Dimensional Array representation** instead of node objects.
-
-The program allows users to interact with the BST through commands such as **insert**, **delete**, **print**, and **exit**.
-
-### Array Index Rules
-The BST follows the standard array-based tree relationships:
-
-- **Root** → index `0`
-- **Left Child** → `2 * i + 1`
-- **Right Child** → `2 * i + 2`
-- **Parent** → `(i - 1) / 2`
+A simple **Binary Search Tree implementation in Java** using an **array-based representation** instead of traditional node objects. The program supports **insertion, deletion, predecessor/successor replacement, and tree printing** through a console interface.
 
 ---
 
-## Features
+# Features
 
-- Insert integer values into the BST
-- Delete a value and replace it with another value
+- Insert values into the BST
 - Prevent duplicate values
-- Print the BST in **1D array format**
-- Automatically adjusts printed size to match the tree depth
-- Find the **index of a specific value**
-- Handles invalid input safely
-- Command-based interaction system
+- Delete nodes using:
+  - **Inorder predecessor**
+  - **Inorder successor** (fallback)
+- Array-based tree representation
+- Console command interface
+- Print tree structure as a level-order array
 
 ---
 
-## Commands
+# Tree Representation
 
-After entering the root value, the program accepts the following commands:
+The BST is stored in a **fixed-size integer array**:
 
-| Command | Description |
-|--------|-------------|
-| `insert` | Insert integer values into the BST |
-| `delete` | Delete a value and replace it with another value |
-| `print` | Display the BST as a 1D array |
-| `exit` | Print the tree and terminate the program |
+```java
+int[] tree = new int[1000];
+```
 
----
+Children are calculated using standard binary heap indexing:
 
-## Example Run
-Enter root value: 30
+| Node | Formula |
+|-----|--------|
+| Left Child | `2*i + 1` |
+| Right Child | `2*i + 2` |
+| Parent | `(i - 1) / 2` |
 
-Command (insert / delete / print / exit): insert
-Enter integer to insert (or type command): 11
-Enter integer to insert (or type command): 40
-Enter integer to insert (or type command): 8
-Enter integer to insert (or type command): 12
-Enter integer to insert (or type command): 35
-Enter integer to insert (or type command): 50
-Enter integer to insert (or type command): 9
-Enter integer to insert (or type command): 32
-Enter integer to insert (or type command): 36
-Enter integer to insert (or type command): 49
-Enter integer to insert (or type command): 53
-Enter integer to insert (or type command): 31
-Enter integer to insert (or type command): print
+Example tree:
 
-Output:
-1D array: 30,11,40,8,12,35,50,0,9,0,0,32,36,49,53,0,0,0,0,0,0,0,0,31,0,0,0,0,0,0,0
+```
+        10
+       /  \
+      5    15
+     / \     \
+    3   7     20
+```
 
-Then the program asks:
-Enter value to find its index: 31
-Index of 31 is: 23
+Array representation:
+
+```
+[10,5,15,3,7,0,20]
+```
+
+`0` represents an empty slot.
 
 ---
 
-## Example BST Structure
+# Operations
 
+## Insert (`i`)
 
-            30
-         /       \
-       11         40
-     /    \     /     \
-    8     12   35      50
-     \         /  \    /  \
-      9       32  36  49  53
-                 /
-                31
+Inserts a new value into the BST.
+
+- Traverses the tree using BST rules
+- Rejects duplicate values
+
+Example:
+
+```
+Cmd (i/d/p/x): i
+Enter val: 15
+Enter val: 5
+Enter val: 20
+```
+
+---
+
+## Delete (`d`)
+
+Deletes a node from the BST.
+
+Cases handled:
+
+### 1. Leaf Node
+Node is removed directly.
+
+### 2. Node With Children
+The node is replaced with:
+
+- **Inorder predecessor** (maximum in left subtree)
+- If not available → **Inorder successor**
+
+Example:
+
+```
+Cmd (i/d/p/x): d
+Enter val to delete: 15
+```
+
+---
+
+## Print (`p`)
+
+Displays the tree as a **complete array representation**.
+
+Example output:
+
+```
+Tree: 10,5,15,3,7,0,20
+```
+
+---
+
+## Exit (`x`)
+
+Prints the tree and exits the program.
+
+```
+Cmd (i/d/p/x): x
+Tree: 10,5,15,3,7,0,20
+End.
+```
+
+---
+
+# Program Flow
+
+1. User enters the **root value**
+2. Program waits for commands:
+
+| Command | Action |
+|--------|-------|
+| `i` | Insert value(s) |
+| `d` | Delete a value |
+| `p` | Print tree |
+| `x` | Exit program |
+
+Example session:
+
+```
+Enter root: 10
+
+Cmd (i/d/p/x): i
+Enter val: 5
+Enter val: 15
+Enter val: 3
+Enter val: p
+
+Tree: 10,5,15,3,0,0,0
+
+Cmd (i/d/p/x): d
+Enter val to delete: 5
+
+Cmd (i/d/p/x): p
+Tree: 10,3,15,0,0,0,0
+
+---
+
+# Limitations
+
+- Uses a **fixed array size (1000)**
+- `0` represents empty nodes (cannot store value `0`)
+- Tree may become sparse when nodes are deleted
+- Not dynamically resized
+
+---
+
+# Possible Improvements
+
+- Dynamic resizing
+- Node-based BST implementation
+- Tree traversals:
+  - Inorder
+  - Preorder
+  - Postorder
+- Search function
+- Tree visualization
+- Self-balancing tree (AVL / Red-Black Tree)
