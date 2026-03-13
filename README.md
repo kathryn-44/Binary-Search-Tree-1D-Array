@@ -2,9 +2,32 @@
 
 A simple **Binary Search Tree implementation in Java** using an **array-based representation** instead of traditional node objects. The program supports **insertion, deletion, predecessor/successor replacement, and tree printing** through a console interface.
 
+This repository includes **two versions of the program**:
+
+- **Main.java** – Basic BST implementation with array printing
+- **WithOrder.java** – Extended version that also prints **tree traversals (Preorder, Inorder, Postorder)** and includes a **search index feature**
+
+---
+
+# Project Structure
+
+```
+/BST-Java
+ ├── Main.java
+ ├── WithOrder.java
+ └── README.md
+```
+
+| File | Description |
+|-----|-------------|
+| `Main.java` | Original BST implementation with insert, delete, and array printing |
+| `WithOrder.java` | Enhanced version that prints **Preorder, Inorder, Postorder traversals** and allows **index searching** |
+
 ---
 
 # Features
+
+### Shared Features (Both Versions)
 
 - Insert values into the BST
 - Prevent duplicate values
@@ -13,7 +36,17 @@ A simple **Binary Search Tree implementation in Java** using an **array-based re
   - **Inorder successor** (fallback)
 - Array-based tree representation
 - Console command interface
-- Print tree structure as a level-order array
+- Print tree structure as a **level-order array**
+- Continuous insert/delete input until command changes
+
+### Additional Features (WithOrder.java)
+
+- Print **tree traversals**
+  - Preorder
+  - Inorder
+  - Postorder
+- Search for the **array index of a value**
+- More detailed tree output for debugging and learning
 
 ---
 
@@ -57,25 +90,26 @@ Array representation:
 
 ## Insert (`i`)
 
-Inserts a new value into the BST.
+Inserts values into the BST.
 
 - Traverses the tree using BST rules
 - Rejects duplicate values
+- Continues inserting until another command is entered
 
 Example:
 
 ```
 Cmd (i/d/p/x): i
-Enter val: 15
-Enter val: 5
-Enter val: 20
+8
+9
+10
 ```
 
 ---
 
 ## Delete (`d`)
 
-Deletes a node from the BST.
+Deletes node(s) from the BST.
 
 Cases handled:
 
@@ -92,7 +126,8 @@ Example:
 
 ```
 Cmd (i/d/p/x): d
-Enter val to delete: 15
+8
+9
 ```
 
 ---
@@ -101,10 +136,34 @@ Enter val to delete: 15
 
 Displays the tree as a **complete array representation**.
 
-Example output:
+Example:
 
 ```
 Tree: 10,5,15,3,7,0,20
+```
+
+### Additional Output (WithOrder.java)
+
+The enhanced version also prints **tree traversals**.
+
+Example:
+
+```
+Tree: 10,5,15,3,7,0,20
+
+Preorder: 10 5 3 7 15 20
+Inorder: 3 5 7 10 15 20
+Postorder: 3 7 5 20 15 10
+```
+
+The program may also prompt the user to **search for the array index of a value**.
+
+Example:
+
+```
+Search index? (y/n): y
+Enter value: 10
+Value 10 is at index 0
 ```
 
 ---
@@ -112,6 +171,8 @@ Tree: 10,5,15,3,7,0,20
 ## Exit (`x`)
 
 Prints the tree and exits the program.
+
+Example:
 
 ```
 Cmd (i/d/p/x): x
@@ -129,7 +190,7 @@ End.
 | Command | Action |
 |--------|-------|
 | `i` | Insert value(s) |
-| `d` | Delete a value |
+| `d` | Delete value(s) |
 | `p` | Print tree |
 | `x` | Exit program |
 
@@ -139,19 +200,20 @@ Example session:
 Enter root: 10
 
 Cmd (i/d/p/x): i
-Enter val: 5
-Enter val: 15
-Enter val: 3
-Enter val: p
+5
+15
+3
 
+Cmd (i/d/p/x): p
 Tree: 10,5,15,3,0,0,0
 
 Cmd (i/d/p/x): d
-Enter val to delete: 5
+5
 
 Cmd (i/d/p/x): p
 Tree: 10,3,15,0,0,0,0
 ```
+
 ---
 
 # Limitations
@@ -160,17 +222,17 @@ Tree: 10,3,15,0,0,0,0
 - `0` represents empty nodes (cannot store value `0`)
 - Tree may become sparse when nodes are deleted
 - Not dynamically resized
+- Not self-balancing
 
 ---
 
 # Possible Improvements
 
-- Dynamic resizing
+- Dynamic array resizing
 - Node-based BST implementation
-- Tree traversals:
-  - Inorder
-  - Preorder
-  - Postorder
-- Search function
-- Tree visualization
-- Self-balancing tree (AVL / Red-Black Tree)
+- Tree visualization (level-based display)
+- Self-balancing trees:
+  - AVL Tree
+  - Red-Black Tree
+- Graphical tree visualization
+- File input/output support
