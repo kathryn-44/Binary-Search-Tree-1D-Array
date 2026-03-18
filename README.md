@@ -80,11 +80,3 @@ All versions support:
 - Continuous input until command changes  
 - Duplicate value prevention  
 
----
-
-## 🌲 Tree Representation
-
-### Array-Based (`Main.java` & `WithOrder.java`)
-
-```java
-int[] tree = new int[1000];
